@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+    <head>
+	    <meta charset="UTF-8">
+	    <title> UFO発見！</title>
+    
+      <style>
+
+        body {
+            background-color: rgb(222, 241, 250);
+          }
+
+          .btn {
+         border-radius: 10px;
+         background-color: rgb(40, 121, 208);
+         padding: 10px;
+         text-align: center;
+         font-size: 25px;
+         color: white;
+         width: 200px;
+
+       }
+
+        .UFO {
+            width: 150px;
+            height: 150px;
+            position: absolute;
+            bottom: 500px;
+            left: 350px;
+          }
+
+        .hakken {
+            width: 400px;
+            height: 400px;
+            position: absolute;
+            bottom: 10px;
+            right: 50px;
+          }
+
+
+      </style>
+
+    </head>
+
+    <body>
+        
+        <button type = "button" class = "btn" id = "btn" autofocus = "true">UFOを飛ばす</button>
+        <img class = "UFO" src = "UFO.png" id = "ufo">
+        <img class = "hakken" src = "hakken_ufo.png">
+        <h2 id = "X">X座標　</h2>
+        <h2 id = "Y">Y座標　</h2>
+  
+    
+        <script>
+
+            let x = 0;
+            let y = 0;
+
+            const ufoFly = () => {
+
+                    x < 360 ? x++ : x = 0;  // Xの角度
+                    y < 360 ? y++ : y = 0;  // Yの角度
+
+                    //座標計算   
+                    let locateX = Math.floor(Math.sin(x * 2 * Math.PI / 180) * 150);
+                    let locateY = Math.floor(Math.cos(y * Math.PI / 180) * 150);
+                    document.getElementById('X').textContent = 'X座標　' + locateX;
+                    document.getElementById('Y').textContent = 'Y座標　' + locateY;
+
+                    //位置変更
+                    const UFO = document.getElementById('ufo');
+                    UFO.style.position = 'absolute';
+                    UFO.style.left = String(locateX + 350) + 'px';
+                    UFO.style.bottom = String(locateY + 450) + 'px';
+
+                }
+                      
+                    //インターバル設定
+                    const btn = document.getElementById('btn');
+                    btn.addEventListener('click',() => {
+                      setInterval(ufoFly,20);
+                    });
+
+        </script>
+
+    </body>
+
+</html>
